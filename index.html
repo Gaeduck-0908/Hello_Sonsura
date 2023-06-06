@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>현명아 안녕</title>
+    <style>
+      * {
+        background-color: black;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #startBtn {
+        color: white;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+</head>
+<body>
+    <button id="startBtn" onclick="start()">작동 시작</button>
+    <div id="h1-container" class="hidden"></div>
+
+ <script>
+      var container = document.querySelector("#h1-container");
+      var startBtn = document.querySelector("#startBtn");
+      
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function getRandomPosition() {
+        var xPos = Math.random() * window.innerWidth + "px";
+        var yPos = Math.random() * window.innerHeight + "px";
+        return { x: xPos, y: yPos };
+      }
+
+      function createH1() {
+        var h1 = document.createElement("h1");
+        h1.textContent = "현명아 안녕";
+
+        h1.style.color = getRandomColor();
+     
+        var position = getRandomPosition();
+        h1.style.left = position.x;
+        h1.style.top = position.y;
+        h1.style.position = "absolute";
+
+        container.appendChild(h1);
+      }
+
+      function start() {
+        startBtn.className += " hidden";
+        container.className = "";
+
+        setInterval(createH1, 10);
+      }
+    </script>
+</body>
+</html>
